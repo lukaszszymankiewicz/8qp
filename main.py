@@ -1,7 +1,5 @@
 from itertools import permutations
 
-import time
-
 size = 8
 
 
