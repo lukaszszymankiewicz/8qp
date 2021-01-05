@@ -61,6 +61,14 @@
     <h3> Base solutions </h3>
     <hr>
 
+    <div class='img-grid'>
+        {% for image in base_solutions_imgs %}
+          <div class='img-wrapper'>
+            <img src = {{ image[4:] }}></img>
+          </div>
+        {% endfor %}
+    </div>
+
     <h3> Source </h3>
     <p>
       <a href = "https://en.wikipedia.org/wiki/Eight_queens_puzzle">

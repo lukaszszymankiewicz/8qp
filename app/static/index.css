@@ -1,0 +1,13 @@
+img {
+  width: 100%;  
+}
+
+.img-grid {
+  width: 95%; 
+  display: flex;
+}
+
+.img-wrapper {
+  margin: 5px;
+  flex: 1;
+}

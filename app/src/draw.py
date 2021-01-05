@@ -4,6 +4,22 @@ import png
 from .constants import BG_COLOR, GREY_COLOR, WHITE_COLOR
 
 
+def draw_solution(solution: list, path: str) -> None:
+    board = _create_board(
+        big_hash_px_size=100,
+        big_hash_n_elements=8,
+        dark_color=GREY_COLOR,
+        light_color=WHITE_COLOR,
+    )
+
+    queen = _read_queen_array()
+
+    for row, col in enumerate(solution):
+        board = _place_queen_on_board(row, col, board, queen)
+
+    png.from_array(board, mode="L").save(path)
+
+
 def _create_hash_board(
     light_field: np.ndarray,
     dark_field: np.ndarray,
@@ -41,7 +57,7 @@ def _create_board(
 
 
 def _read_queen_array():
-    raw_file = png.Reader(filename="queen_sm3.png").asDirect()[2]
+    raw_file = png.Reader(filename="app/static/queen.png").asDirect()[2]
     return np.vstack(map(np.uint8, raw_file))
 
 
@@ -50,19 +66,3 @@ def _place_queen_on_board(row: int, col: int, board: np.ndarray, queen: np.ndarr
     cols = slice(col * 100, col * 100 + 100)
     board[rows, cols] = np.where(queen != BG_COLOR, queen, board[rows, cols])
     return board
-
-
-def draw_combination(combination: list, filename="sample_board.png") -> None:
-    board = _create_board(
-        big_hash_px_size=100,
-        big_hash_n_elements=8,
-        dark_color=GREY_COLOR,
-        light_color=WHITE_COLOR,
-    )
-
-    queen = _read_queen_array()
-
-    for row, col in enumerate(combination):
-        board = _place_queen_on_board(row, col, board, queen)
-
-    png.from_array(board, mode="L").save(filename)

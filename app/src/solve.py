@@ -39,23 +39,25 @@ def _place_queens(rows: set, coords_set) -> bool:
     return True
 
 
-def solve():
+def find_all_solutions() -> list:
     results = []
     coords_set = _calculate_coords_set()
 
-    # ALL POSSIBLE COMBINATIONS
     for rows_combination in permutations(SIZE_RANGE):
         result = _place_queens(rows_combination, coords_set)
 
         if result:
             results.append(list(rows_combination))
 
-    # DELETING REDUNDANT COMBINATIONS
-    for combination in results:
-        for transformation in all_transformations:
-            transformed_result = transformation(combination)
-
-            if transformed_result in results:
-                results.remove(transformed_result)
-
     return results
+
+
+def filter_redundant_solutions(solutions: list) -> list:
+    for solution in solutions:
+        for transformation in all_transformations:
+            transformed_solution = transformation(solution)
+
+            if transformed_solution in solutions:
+                solutions.remove(transformed_solution)
+
+    return solutions
