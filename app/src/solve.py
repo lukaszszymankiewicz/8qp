@@ -39,7 +39,7 @@ def _place_queens(rows: set, coords_set) -> bool:
     return True
 
 
-def find_solutions():
+def solve():
     results = []
     coords_set = _calculate_coords_set()
 

@@ -1,0 +1,72 @@
+<!doctype html>
+
+<head>
+  {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="static/index.css">
+  {% endblock %}
+</head>
+
+<body>
+
+  {% block content %}
+    <h2> Eight queens puzzle </h2>
+    <hr>
+    <h3> Problem </h3>
+    <p>
+        The eight queens puzzle is the problem of placing eight chess queens on an 8×8 chessboard
+        so that no two queens threaten each other; thus, a solution requires that no two queens 
+        share the same row, column, or diagonal. Chess composer Max Bezzel published the eight 
+        queens puzzle in 1848. Franz Nauck published the first solutions in 1850. Nauck also 
+        extended the puzzle to the n queens problem, with n queens on a chessboard of n×n squares.
+    </p>
+    <p>
+        Since then, many mathematicians, including Carl Friedrich Gauss, have worked on both the 
+        eight queens puzzle and its generalized n-queens version. In 1874, S. Gunther proposed 
+        a method using determinants to find solutions. J.W.L. Glaisher refined Gunther's approach. 
+    </p>
+
+    <h3> Algorithm </h3>
+    <hr>
+    <p>
+        Hence chessboard has is constructed from 64 (8 by 8) fields thus using bare brute-force
+        algorithm will needs to check 64<sup>8</sup> = 281,474,976,710,656 combintaions in looks 
+        for all possible legal combinations. No need to say that such approach is costy in terms of 
+        computing power.
+    </p>
+    <p>
+        Finding only one (first) solution, even considering such naive algorithm will be somehow
+        fast, but finding all possible combinations forces to check any one of those.
+    </p>
+    <p>
+        This big number of combinations to check can be easily filtered to find only such
+        combinations in which by default there is only one queen on each row and one on each
+        columns. This can be achieved by generating the permutations of the numbers 1 through 8 
+        (of which there are 8! = 40,320), and uses the elements of each permutation as indices to 
+        place a queen on each row. 
+    </p>
+    <p>
+        Such combination number is not too costy, and will found all possible queens positions
+        solvidng this puzzle. This can be also upgraded by filtering such permutations that does not
+        have following queen placed in distance of one from another (as this will be violating
+        diagonal line of queens attack).
+    </p>
+    <p>
+        There are 96 possible solutions to this problem, thus only 12 base one (other can be
+        achieved by symmetry or rotating).
+    </p>
+
+    <h3> All solutions </h3>
+    <hr>
+
+    <h3> Base solutions </h3>
+    <hr>
+
+    <h3> Source </h3>
+    <p>
+      <a href = "https://en.wikipedia.org/wiki/Eight_queens_puzzle">
+        [1] https://en.wikipedia.org/wiki/Eight_queens_puzzle
+      </a>
+    <p>
+  {% endblock %}
+
+</body>
