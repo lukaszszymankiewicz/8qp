@@ -1,7 +1,7 @@
 import numpy as np
 import png
 
-from .constants import BG_COLOR, GREY_COLOR, WHITE_COLOR
+from .constants import BG_COLOR, BLACK_COLOR, GREY_COLOR, WHITE_COLOR
 
 
 def draw_solution(solution: list, path: str) -> None:
@@ -16,6 +16,9 @@ def draw_solution(solution: list, path: str) -> None:
 
     for row, col in enumerate(solution):
         board = _place_queen_on_board(row, col, board, queen)
+
+    # this will give image nice black border around it
+    board = np.pad(board, pad_width=3, mode="constant", constant_values=BLACK_COLOR)
 
     png.from_array(board, mode="L").save(path)
 

@@ -58,16 +58,31 @@
     <h3> All solutions </h3>
     <hr>
 
-    <h3> Base solutions </h3>
-    <hr>
-
-    <div class='img-grid'>
-        {% for image in base_solutions_imgs %}
+    {% for images_batch in all_solutions_imgs|batch(6) %}
+    <center>
+      <div class='img-grid'>
+        {% for image in images_batch %}
           <div class='img-wrapper'>
             <img src = {{ image[4:] }}></img>
           </div>
         {% endfor %}
-    </div>
+      </div>
+    </center>
+    {% endfor %}
+    <h3> Base solutions </h3>
+    <hr>
+
+    {% for images_batch in base_solutions_imgs|batch(6) %}
+    <center>
+      <div class='img-grid'>
+        {% for image in images_batch %}
+          <div class='img-wrapper'>
+            <img src = {{ image[4:] }}></img>
+          </div>
+        {% endfor %}
+      </div>
+    </center>
+    {% endfor %}
 
     <h3> Source </h3>
     <p>

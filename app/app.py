@@ -15,12 +15,11 @@ delete_all_images()
 def index():
     delete_all_images()
     all_solutions = find_all_solutions()
-    filtered_solutions = filter_redundant_solutions(all_solutions)
-
     for solution in all_solutions:
         filename = "".join(str(n) for n in solution)
         draw_solution(solution=solution, path="app/static/solutions/all/" + filename + ".png")
 
+    filtered_solutions = filter_redundant_solutions(all_solutions)
     for solution in filtered_solutions:
         filename = "".join(str(n) for n in solution)
         draw_solution(solution=solution, path="app/static/solutions/base/" + filename + ".png")

@@ -1,10 +1,11 @@
 img {
-  width: 100%;  
+  max-width: 200px;
 }
 
 .img-grid {
   width: 95%; 
   display: flex;
+  align-self: center;
 }
 
 .img-wrapper {
