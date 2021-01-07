@@ -30,25 +30,28 @@
     <p>
         Hence chessboard has is constructed from 64 (8 by 8) fields thus using bare brute-force
         algorithm will needs to check 64<sup>8</sup> = 281,474,976,710,656 combintaions in looks 
-        for all possible legal combinations. No need to say that such approach is costy in terms of 
-        computing power.
-    </p>
-    <p>
-        Finding only one (first) solution, even considering such naive algorithm will be somehow
-        fast, but finding all possible combinations forces to check any one of those.
-    </p>
+        for all possible solutions. No need to say that such approach is costy and unifficient
+        in terms of computing power.
+        Despite the fact, that finding first solution in such way would propably be enough, so
+        finding all of them would propably kill the CPU.
     <p>
         This big number of combinations to check can be easily filtered to find only such
         combinations in which by default there is only one queen on each row and one on each
         columns. This can be achieved by generating the permutations of the numbers 1 through 8 
-        (of which there are 8! = 40,320), and uses the elements of each permutation as indices to 
-        place a queen on each row. 
+        (of which there are 8! = 40,320). For example, in such logic combination (0, 2, 5, 7, 3, 1,
+        6, 4) every number means y-position of the queen and number position in such vector means
+        x-position on the chessboard.
+        Genereting such permutations is pretty easy in Python, such there is build-in permutations
+        function in itertools module. It is worth noticing that such approach dissmiss necessity of
+        checking whether queens are in same row or column (only checking at diagonals are needed).
+        Such combination number is not too costy, and will found all possible queens positions
+        solving this puzzle.
     </p>
     <p>
-        Such combination number is not too costy, and will found all possible queens positions
-        solvidng this puzzle. This can be also upgraded by filtering such permutations that does not
-        have following queen placed in distance of one from another (as this will be violating
-        diagonal line of queens attack).
+        Solutions presented on this site is generated used above method. To detect whether two
+        queens are on same diagonal line, set of diagonal coordinates are created and compared.
+        Cause permutations() method from itertools, sets comparision and coordinates generations are
+        written in low-level C language, algorithm is rather quick.
     </p>
     <p>
         There are 96 possible solutions to this problem, thus only 12 base one (other can be

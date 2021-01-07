@@ -9,12 +9,6 @@ def _calculate_coords_set():
 
 
 def _calculate_coords(row: int, col: int) -> set:
-    # rows
-    rows = {(row, y) for y in SIZE_RANGE}
-
-    # cols
-    cols = {(x, col) for x in SIZE_RANGE}
-
     # diags
     x = range(max(0, row - col), min(SIZE, SIZE - (col - row)))
     y = range(max(0, col - row), min(SIZE, SIZE - (row - col)))
@@ -24,7 +18,7 @@ def _calculate_coords(row: int, col: int) -> set:
     x = range(max(0, col + row - SIZE + 1), min(SIZE, col + row + 1))
     antidiags = set(zip(x, x[::-1]))
 
-    return rows | cols | diags | antidiags
+    return diags | antidiags
 
 
 def _place_queens(rows: set, coords_set) -> bool:
