@@ -39,9 +39,9 @@
         combinations in which by default there is only one queen on each row and one on each
         columns. This can be achieved by generating the permutations of the numbers 1 through 8 
         (of which there are 8! = 40,320). For example, in such logic combination (0, 2, 5, 7, 3, 1,
-        6, 4) every number means y-position of the queen and number position in such vector means
-        x-position on the chessboard.
-        Genereting such permutations is pretty easy in Python, such there is build-in permutations
+        6, 4) means that every number is y-position of the queen and number position in such vector 
+        means x-position on the chessboard.
+        Generating such permutations is pretty easy in Python, such there is build-in permutations
         function in itertools module. It is worth noticing that such approach dissmiss necessity of
         checking whether queens are in same row or column (only checking at diagonals are needed).
         Such combination number is not too costy, and will found all possible queens positions
@@ -51,11 +51,25 @@
         Solutions presented on this site is generated used above method. To detect whether two
         queens are on same diagonal line, set of diagonal coordinates are created and compared.
         Cause permutations() method from itertools, sets comparision and coordinates generations are
-        written in low-level C language, algorithm is rather quick.
+        written in low-level C language, algorithm is rather quick. For generating png pictures a
+        library called <a href="https://github.com/drj11/pypng">pypng</a> is used, which is awsome
+        and alows to create images directly from numpy arrays.
     </p>
     <p>
         There are 96 possible solutions to this problem, thus only 12 base one (other can be
-        achieved by symmetry or rotating).
+        achieved by symmetry or rotating). All images and solutions were calculated on a fly.
+    </p>
+    <p>
+        Source code can be found <a href = "https://github.com/lukaszszymankiewicz/8qp">here</a>
+    </p>
+
+    <h3> Statistics: </h3>
+    <hr>
+
+    <p>
+        Generating solutions took: {{ solve_time }} s. <br>
+        Filtering redundat solutions took: {{ filter_time }} s. <br>
+        Generating images took: {{ images_time }} s. <br>
     </p>
 
     <h3> All solutions </h3>
@@ -87,7 +101,7 @@
     </center>
     {% endfor %}
 
-    <h3> Source </h3>
+    <h3> Links: </h3>
     <p>
       <a href = "https://en.wikipedia.org/wiki/Eight_queens_puzzle">
         [1] https://en.wikipedia.org/wiki/Eight_queens_puzzle
