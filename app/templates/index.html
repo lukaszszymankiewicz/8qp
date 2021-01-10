@@ -35,9 +35,9 @@
         Despite the fact, that finding first solution in such way would propably be enough, so
         finding all of them would propably kill the CPU.
     <p>
-        This big number of combinations to check can be easily filtered to find only such
+        This big number of combinations to check can be easily filtered to only such
         combinations in which by default there is only one queen on each row and one on each
-        columns. This can be achieved by generating the permutations of the numbers 1 through 8 
+        column. This can be achieved by generating the permutations of the numbers 1 through 8 
         (of which there are 8! = 40,320). For example, in such logic combination (0, 2, 5, 7, 3, 1,
         6, 4) means that every number is y-position of the queen and number position in such vector 
         means x-position on the chessboard.
@@ -50,14 +50,18 @@
     <p>
         Solutions presented on this site is generated used above method. To detect whether two
         queens are on same diagonal line, set of diagonal coordinates are created and compared.
+        To generate diagonal coordinates build-in range, min and max function are used.
         Cause permutations() method from itertools, sets comparision and coordinates generations are
         written in low-level C language, algorithm is rather quick. For generating png pictures a
         library called <a href="https://github.com/drj11/pypng">pypng</a> is used, which is awsome
         and alows to create images directly from numpy arrays.
     </p>
     <p>
-        There are 96 possible solutions to this problem, thus only 12 base one (other can be
-        achieved by symmetry or rotating). All images and solutions were calculated on a fly.
+        There are 96 possible solutions to this problem, thus most of them can be achieved using
+        symmetry (horizontal, vertical, diagonal and antidiagonal) or rotating (by 90, 180 and 270
+        degrees). Comparing all of solution and their transormations results in 12 "base" results.
+
+        All images on this page and solutions were calculated on a fly.
     </p>
     <p>
         Source code can be found <a href = "https://github.com/lukaszszymankiewicz/8qp">here</a>

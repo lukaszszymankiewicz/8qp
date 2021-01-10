@@ -1,7 +1,11 @@
+import numpy as np
+
 SIZE = 8
-SIZE_RANGE = range(8)
+SIZE_RANGE = range(SIZE)
 
 GREY_COLOR = 120
 WHITE_COLOR = 255
 BLACK_COLOR = 0
 BG_COLOR = 85
+FIELD_PX_SIZE = 100
+DTYPE = np.uint8
