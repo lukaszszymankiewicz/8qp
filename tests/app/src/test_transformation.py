@@ -1,0 +1,46 @@
+import pytest
+from app.src.solve import (_combination_is_solution,
+                           _get_thretening_fields_for_all_queens,
+                           find_all_solutions)
+from app.src.transformations import (all_transformations, antidiag_symmetry,
+                                     diag_symmetry, horizontal_symmetry, rot90,
+                                     rot180, rot270, vertical_symmetry)
+
+
+@pytest.mark.parametrize("combination", find_all_solutions())
+def test_every_transformation_returns_proper_solution(combination):
+    # GIVEN
+    thretening_fields = _get_thretening_fields_for_all_queens()
+
+    # WHEN
+    for transformation in all_transformations:
+        transformed_solution = transformation(combination)
+
+        # THEN
+        assert _combination_is_solution(transformed_solution, thretening_fields)
+
+
+# fmt.off
+@pytest.mark.parametrize(
+    "transformation, expected_combination",
+    [
+        (vertical_symmetry, [2, 6, 1, 7, 5, 3, 0, 4]),
+        (horizontal_symmetry, [3, 7, 4, 2, 0, 6, 1, 5]),
+        (rot90, [4, 6, 3, 0, 2, 7, 5, 1]),
+        (rot180, [5, 1, 6, 0, 2, 4, 7, 3]),
+        (rot270, [6, 2, 0, 5, 7, 4, 1, 3]),
+        (antidiag_symmetry, [3, 1, 4, 7, 5, 0, 2, 6]),
+        (diag_symmetry, [1, 5, 7, 2, 0, 3, 6, 4]),
+    ],
+)
+# fmt.on
+def test_transformation_returns_proper_results(transformation, expected_combination):
+    # GIVEN
+    base_combination = [4, 0, 3, 5, 7, 1, 6, 2]
+
+    # WHEN
+    transformed_combination = transformation(base_combination)
+
+    # THEN
+    assert sorted(transformed_combination) == list(range(8))
+    assert transformed_combination == expected_combination

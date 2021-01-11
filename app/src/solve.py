@@ -1,11 +1,13 @@
 from itertools import permutations
 from typing import Dict, Generator, List, Set, Tuple
 
-from .constants import SIZE, SIZE_RANGE
+from .constants import SIZE
 from .transformations import all_transformations
 
 
-def _get_thretening_fields_for_all_queens() -> Dict[Tuple[int, int], Set[Tuple[int, int]]]:
+def _get_thretening_fields_for_all_queens(
+    board_size: int,
+) -> Dict[Tuple[int, int], Set[Tuple[int, int]]]:
     """
     Generates dict containing all thretening fields by queen.
 
@@ -13,7 +15,7 @@ def _get_thretening_fields_for_all_queens() -> Dict[Tuple[int, int], Set[Tuple[i
     generation is done only once to save computing power and re-use every time needed.
 
     Args:
-        None
+        board_size: integer number representing number of fields in chessboard.
 
     Retuns:
         dict which looks like:
@@ -22,13 +24,13 @@ def _get_thretening_fields_for_all_queens() -> Dict[Tuple[int, int], Set[Tuple[i
 
     """
     return {
-        (row, col): _get_thretening_fields_for_single_queen(row, col)
-        for row in SIZE_RANGE
-        for col in SIZE_RANGE
+        (row, col): _get_thretening_fields_for_single_queen(row, col, board_size)
+        for row in range(board_size)
+        for col in range(board_size)
     }
 
 
-def _get_thretening_fields_for_single_queen(row: int, col: int) -> Set[Tuple[int, int]]:
+def _get_thretening_fields_for_single_queen(row: int, col: int, size: int) -> Set[Tuple[int, int]]:
     """
     Generates thretening fileds for on queen. Thus algorithm by definition excludes such combintaion
     which have queen on same row or column, there is no need for generating thretening fields on
@@ -36,26 +38,27 @@ def _get_thretening_fields_for_single_queen(row: int, col: int) -> Set[Tuple[int
 
     Args:
         row: integer number, y-position of queen on a chessboard,
-        col: integer number, x-position of queen on a chessboard.
+        col: integer number, x-position of queen on a chessboard,
+        size: integer representing number of fields in rows and column in chessboard.
 
     Returns:
         Single set containing coordinates of thretening fields by one queen expressed by set of
         tuples. Each tuple is expressing coordinates of one field.
     """
     # diags
-    x = range(max(0, row - col), min(SIZE, SIZE - (col - row)))
-    y = range(max(0, col - row), min(SIZE, SIZE - (row - col)))
+    x = range(max(0, row - col), min(size, size - (col - row)))
+    y = range(max(0, col - row), min(size, size - (row - col)))
     diags = set(zip(x, y))
 
     # antidiags
-    x = range(max(0, col + row - SIZE + 1), min(SIZE, col + row + 1))
+    x = range(max(0, col + row - size + 1), min(size, col + row + 1))
     antidiags = set(zip(x, x[::-1]))
 
     return diags | antidiags
 
 
 def _combination_is_solution(
-    combination: set, coords_set: Dict[Tuple[int, int], Set[Tuple[int, int]]]
+    combination: set, thretening_fields: Dict[Tuple[int, int], Set[Tuple[int, int]]]
 ) -> bool:
     """
     Having single combination of rows (and column) where queens need to be put on chessboard,
@@ -77,12 +80,12 @@ def _combination_is_solution(
         if (row, col) in coords:
             return False
         else:
-            coords |= coords_set[row, col]
+            coords |= thretening_fields[row, col]
 
     return True
 
 
-def _get_all_possible_combinations() -> Generator:
+def _get_all_possible_combinations(size: int) -> Generator:
     """
     Creates generator which will yield all queens combination on chessboard.
 
@@ -92,16 +95,19 @@ def _get_all_possible_combinations() -> Generator:
     Each number represents y-position on chessboard, while number position in tuple represents
     x-postion on chessboard. Generating permutations of list of numbers from 1 to 8 returns in every
     possible combinations of queens.
+
+    Args:
+        size: number of following number to generate permutations from.
     """
-    return permutations(SIZE_RANGE)
+    return permutations(range(size))
 
 
-def find_all_solutions() -> List[List[int]]:
+def find_all_solutions(size: int = SIZE) -> List[List[int]]:
     """
     Generates all legal solution to eight queen problem.
 
     Args:
-        None.
+        size - integer number representing number of fileds from which board is consisted.
 
     Returns:
         List of combinations which is a legal solution to eight queen problem. Each combination is a
@@ -109,8 +115,9 @@ def find_all_solutions() -> List[List[int]]:
         while position of number on the list represents queen x-position on a chessboard.
     """
     solutions = []
-    thretening_fields = _get_thretening_fields_for_all_queens()
-    all_possible_combinations = _get_all_possible_combinations()
+
+    thretening_fields = _get_thretening_fields_for_all_queens(size)
+    all_possible_combinations = _get_all_possible_combinations(size)
 
     for combination in all_possible_combinations:
         if _combination_is_solution(combination, thretening_fields):

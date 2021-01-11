@@ -88,7 +88,7 @@ def _read_queen_array() -> IMAGE_AS_ARRAY:
 
 
 def _place_queen_on_board(
-    row: int, col: int, board: np.ndarray, queen: np.ndarray
+    row: int, col: int, board: np.ndarray, queen: np.ndarray, n_elements: int
 ) -> IMAGE_AS_ARRAY:
     """
     Places queen image on board image according to its position on chessboard.
@@ -97,13 +97,18 @@ def _place_queen_on_board(
         row: y-coordinate of queen on a chessboard,
         col: x-coordinate of queen on a chessboard,
         board: numpy image representig chessboard,
-        queen: numpy image representig queen.
+        queen: numpy image representig queen,
+        n_elements: integer number represeinting number of fileds in every row and column of a
+            board.
 
     Returns:
         numpy image representig chessboard with queen placed in right place.
     """
-    rows = slice(row * FIELD_PX_SIZE, row * FIELD_PX_SIZE + FIELD_PX_SIZE)
-    cols = slice(col * FIELD_PX_SIZE, col * FIELD_PX_SIZE + FIELD_PX_SIZE)
+    field_px_size = board // n_elements
+
+    rows = slice(row * field_px_size, row * field_px_size + field_px_size)
+    cols = slice(col * field_px_size, col * field_px_size + field_px_size)
+
     board[rows, cols] = np.where(queen != BG_COLOR, queen, board[rows, cols])
 
     return board
@@ -131,7 +136,7 @@ def draw_solution(solution: List[int], path: str) -> None:
     queen = _read_queen_array()
 
     for row, col in enumerate(solution):
-        board = _place_queen_on_board(row, col, board, queen)
+        board = _place_queen_on_board(row, col, board, queen, SIZE)
 
     # this will give image nice black border around it
     board = np.pad(board, pad_width=3, mode="constant", constant_values=BLACK_COLOR)
