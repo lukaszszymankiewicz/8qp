@@ -11,6 +11,7 @@
   {% block content %}
     <h2> Eight queens puzzle </h2>
     <hr>
+
     <h3> Problem </h3>
     <p>
         The eight queens puzzle is the problem of placing eight chess queens on an 8×8 chessboard
@@ -26,7 +27,6 @@
     </p>
 
     <h3> Algorithm </h3>
-    <hr>
     <p>
         Hence chessboard has is constructed from 64 (8 by 8) fields thus using bare brute-force
         algorithm will needs to check 64<sup>8</sup> = 281,474,976,710,656 combintaions in looks 
@@ -57,7 +57,7 @@
         and alows to create images directly from numpy arrays.
     </p>
     <p>
-        There are 96 possible solutions to this problem, thus most of them can be achieved using
+        There are 92 possible solutions to this problem, thus most of them can be achieved using
         symmetry (horizontal, vertical, diagonal and antidiagonal) or rotating (by 90, 180 and 270
         degrees). Comparing all of solution and their transormations results in 12 "base" results.
 
@@ -67,8 +67,7 @@
         Source code can be found <a href = "https://github.com/lukaszszymankiewicz/8qp">here</a>
     </p>
 
-    <h3> Statistics: </h3>
-    <hr>
+    <h3> Statistics </h3>
 
     <p>
         Generating solutions took: {{ solve_time }} s. <br>
@@ -76,22 +75,7 @@
         Generating images took: {{ images_time }} s. <br>
     </p>
 
-    <h3> All solutions </h3>
-    <hr>
-
-    {% for images_batch in all_solutions_imgs|batch(6) %}
-    <center>
-      <div class='img-grid'>
-        {% for image in images_batch %}
-          <div class='img-wrapper'>
-            <img src = {{ image[4:] }}></img>
-          </div>
-        {% endfor %}
-      </div>
-    </center>
-    {% endfor %}
-    <h3> Base solutions </h3>
-    <hr>
+    <h3> Solutions </h3>
 
     {% for images_batch in base_solutions_imgs|batch(6) %}
     <center>
@@ -105,7 +89,7 @@
     </center>
     {% endfor %}
 
-    <h3> Links: </h3>
+    <h3> Links </h3>
     <p>
       <a href = "https://en.wikipedia.org/wiki/Eight_queens_puzzle">
         [1] https://en.wikipedia.org/wiki/Eight_queens_puzzle

@@ -2,8 +2,6 @@ import glob
 import os
 from typing import List
 
-from .file_paths import all_solutions_path, base_solutions_path
-
 
 def get_all_files_in_path(path: str) -> List[str]:
     """
@@ -18,13 +16,28 @@ def get_all_files_in_path(path: str) -> List[str]:
     return glob.glob(path + "*")
 
 
-def delete_all_images() -> None:
+def delete_all_files(path: str) -> None:
     """
     Function for cleaning files from once generated soultions. Each request to main page should
     generate puzzle results from the scratch.
+
+    Args:
+        path: folder in which function will look into.
     """
-    for file in get_all_files_in_path(all_solutions_path):
+    for file in get_all_files_in_path(path):
         os.remove(file)
 
-    for file in get_all_files_in_path(base_solutions_path):
-        os.remove(file)
+
+def create_folder(path: str) -> None:
+    try:
+        os.mkdir(path)
+    except OSError:
+        pass
+
+
+def delete_folder(path: str) -> None:
+    try:
+        delete_all_files(path)
+        os.rmdir(path)
+    except OSError:
+        pass

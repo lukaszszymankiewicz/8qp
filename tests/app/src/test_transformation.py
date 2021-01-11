@@ -10,7 +10,7 @@ from app.src.transformations import (all_transformations, antidiag_symmetry,
 @pytest.mark.parametrize("combination", find_all_solutions())
 def test_every_transformation_returns_proper_solution(combination):
     # GIVEN
-    thretening_fields = _get_thretening_fields_for_all_queens()
+    thretening_fields = _get_thretening_fields_for_all_queens(board_size=8)
 
     # WHEN
     for transformation in all_transformations:
@@ -20,7 +20,6 @@ def test_every_transformation_returns_proper_solution(combination):
         assert _combination_is_solution(transformed_solution, thretening_fields)
 
 
-# fmt.off
 @pytest.mark.parametrize(
     "transformation, expected_combination",
     [
@@ -33,7 +32,6 @@ def test_every_transformation_returns_proper_solution(combination):
         (diag_symmetry, [1, 5, 7, 2, 0, 3, 6, 4]),
     ],
 )
-# fmt.on
 def test_transformation_returns_proper_results(transformation, expected_combination):
     # GIVEN
     base_combination = [4, 0, 3, 5, 7, 1, 6, 2]

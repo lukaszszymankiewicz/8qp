@@ -1,6 +1,6 @@
 from typing import List
 
-from .constants import SIZE, SIZE_RANGE
+from .constants import SIZE
 
 """
 Here are all transformations functions. Every each of them is taking proper solution
@@ -17,7 +17,7 @@ def horizontal_symmetry(combination: List[int]) -> List[int]:
 
 
 def rot90(combination: List[int]) -> List[int]:
-    numbers = SIZE_RANGE
+    numbers = range(SIZE)
     result = [0] * SIZE
     orders = [SIZE - 1 - c for c in combination]
 
@@ -32,7 +32,7 @@ def rot180(combination: List[int]) -> List[int]:
 
 
 def rot270(combination: List[int]) -> List[int]:
-    numbers = SIZE_RANGE[::-1]
+    numbers = range(SIZE)[::-1]
     result = [0] * SIZE
 
     for number, order in zip(numbers, combination):
@@ -42,7 +42,7 @@ def rot270(combination: List[int]) -> List[int]:
 
 
 def diag_symmetry(combination: List[int]) -> List[int]:
-    numbers = SIZE_RANGE
+    numbers = range(SIZE)
     result = [0] * SIZE
 
     for number, order in zip(numbers, combination):
@@ -52,7 +52,7 @@ def diag_symmetry(combination: List[int]) -> List[int]:
 
 
 def antidiag_symmetry(combination: List[int]) -> List[int]:
-    numbers = SIZE_RANGE[::-1]
+    numbers = range(SIZE)[::-1]
     orders = [SIZE - 1 - c for c in combination]
     result = [0] * SIZE
 

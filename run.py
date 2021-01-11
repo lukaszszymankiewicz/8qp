@@ -1,7 +1,5 @@
 import os
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-
 from app.app import app
 
 if __name__ == "__main__":

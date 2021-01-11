@@ -12,7 +12,7 @@ def test_get_all_possible_combinations_works_properly():
     size = 8
 
     # WHEN
-    n_combinations = len(_get_all_possible_combinations(size))
+    n_combinations = len(list(_get_all_possible_combinations(size)))
 
     # THEN
     assert expected_length == n_combinations

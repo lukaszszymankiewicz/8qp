@@ -1,3 +1,4 @@
+from copy import deepcopy
 from itertools import permutations
 from typing import Dict, Generator, List, Set, Tuple
 
@@ -138,11 +139,14 @@ def filter_redundant_solutions(solutions: List[List[int]]) -> List[List[int]]:
         List of lists (same form ans paramter) but filtered.
 
     """
+    result = []
+
     for solution in solutions:
-        for transformation in all_transformations:
-            transformed_solution = transformation(solution)
+        transformed_solutions = [transformation(solution) for transformation in all_transformations]
 
-            if transformed_solution in solutions:
-                solutions.remove(transformed_solution)
+        if not any(
+            [transformed_solution in result for transformed_solution in transformed_solutions]
+        ):
+            result.append(solution)
 
-    return solutions
+    return result
