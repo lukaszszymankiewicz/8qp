@@ -104,7 +104,7 @@ def _place_queen_on_board(
     Returns:
         numpy image representig chessboard with queen placed in right place.
     """
-    field_px_size = board // n_elements
+    field_px_size = board.shape[0] // n_elements
 
     rows = slice(row * field_px_size, row * field_px_size + field_px_size)
     cols = slice(col * field_px_size, col * field_px_size + field_px_size)
