@@ -70,9 +70,9 @@
     <h3> Statistics </h3>
 
     <p>
-        Generating solutions took: {{ solve_time }} s. <br>
-        Filtering redundat solutions took: {{ filter_time }} s. <br>
-        Generating images took: {{ images_time }} s. <br>
+        Generating solutions took: {{'%0.4f'|format(solve_time|float)}} s. <br>
+        Filtering redundat solutions took: {{'%0.4f'|format(filter_time|float)}} s. <br>
+        Generating images took: {{'%0.4f'|format(images_time|float)}} s. <br>
     </p>
 
     <h3> Solutions </h3>
