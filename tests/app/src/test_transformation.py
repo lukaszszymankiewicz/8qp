@@ -1,23 +1,7 @@
 import pytest
-from app.src.solve import (_combination_is_solution,
-                           _get_thretening_fields_for_all_queens,
-                           find_all_solutions)
-from app.src.transformations import (all_transformations, antidiag_symmetry,
-                                     diag_symmetry, horizontal_symmetry, rot90,
-                                     rot180, rot270, vertical_symmetry)
-
-
-@pytest.mark.parametrize("combination", find_all_solutions())
-def test_every_transformation_returns_proper_solution(combination):
-    # GIVEN
-    thretening_fields = _get_thretening_fields_for_all_queens(board_size=8)
-
-    # WHEN
-    for transformation in all_transformations:
-        transformed_solution = transformation(combination)
-
-        # THEN
-        assert _combination_is_solution(transformed_solution, thretening_fields)
+from app.src.transformations import (antidiag_symmetry, diag_symmetry,
+                                     horizontal_symmetry, rot90, rot180,
+                                     rot270, vertical_symmetry)
 
 
 @pytest.mark.parametrize(
