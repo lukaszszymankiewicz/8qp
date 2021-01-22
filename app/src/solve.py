@@ -47,7 +47,5 @@ def find_all_solutions() -> List[List[int]]:
     alg = ctypes.CDLL("./app/src/alg.so")
     alg.solve.restype = ctypes.POINTER(ctypes.c_int)
     solutions_pointer = alg.solve()
-    solutions = [[solutions_pointer[i + j] for i in range(SIZE)] for j in range(SOLUTIONS)]
 
-    print(solutions)
-    return solutions
+    return [[solutions_pointer[8 * i + j] for j in range(SIZE)] for i in range(92)]
