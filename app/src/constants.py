@@ -1,6 +1,7 @@
 import numpy as np
 
 SIZE = 8
+SOLUTIONS = 92
 SIZE_RANGE = range(SIZE)
 
 GREY_COLOR = 120
