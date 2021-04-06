@@ -41,6 +41,8 @@
         (of which there are 8! = 40,320). For example, in such logic combination (0, 2, 5, 7, 3, 1,
         6, 4) means that every number is y-position of the queen and number position in such vector 
         means x-position on the chessboard.
+        For better clarity in code, permutations are generated in lexicographic order - each new
+        permutation is then check if it is a valid solution.
         Such set need to filtered to detect such queens positions in which they are in same
         diagonal. To achieve this each diagonal (and antidiagonal) is indexed with numbers from 0 to
         15, and each potential solutions is check if two queens share same diagonal line. Every
