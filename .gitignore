@@ -7,3 +7,4 @@ idea
 *.pyc
 pyproject.toml
 setup.cfg
+.nvimlog
