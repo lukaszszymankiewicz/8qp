@@ -9,10 +9,11 @@
 <body>
 
   {% block content %}
-    <h2> Eight queens puzzle </h2>
+    <center><h2> Eight queens puzzle </h2></center>
     <hr>
 
     <h3> Problem </h3>
+
     <p>
         The eight queens puzzle is the problem of placing eight chess queens on an 8×8 chessboard
         so that no two queens threaten each other; thus, a solution requires that no two queens 
@@ -20,10 +21,13 @@
         queens puzzle in 1848. Franz Nauck published the first solutions in 1850. Nauck also 
         extended the puzzle to the n queens problem, with n queens on a chessboard of n×n squares.
     </p>
+
     <p>
         Since then, many mathematicians, including Carl Friedrich Gauss, have worked on both the 
         eight queens puzzle and its generalized n-queens version. In 1874, S. Gunther proposed 
         a method using determinants to find solutions. J.W.L. Glaisher refined Gunther's approach. 
+        For further reading wikipedia article for this puzzle can be helpful:
+        <a href = "https://en.wikipedia.org/wiki/Eight_queens_puzzle"> Eight_queens_puzzle </a>
     </p>
 
     <h3> Algorithm </h3>
@@ -34,6 +38,8 @@
         in terms of computing power.
         Despite the fact, that finding first solution in such way would propably be enough, so
         finding all of them would propably kill the CPU.
+    </p>
+
     <p>
         This big number of combinations to check can be easily filtered to only such
         combinations in which by default there is only one queen on each row and one on each
@@ -49,6 +55,7 @@
         "reserved" line is held as one bit in 2 byte number. Such approach let us to use simplest
         bit-logic operations to check and reserve each diagonal. This part of code is written in C.
     </p>
+
     <p>
         There are 92 possible solutions to this problem, thus most of them can be achieved using
         symmetry (horizontal, vertical, diagonal and antidiagonal) or rotating (by 90, 180 and 270
@@ -56,28 +63,32 @@
         Finding redundant solutions is written in Python. All images on this page and solutions 
         were calculated on a fly.
     </p>
+
     <p>
         For generating png pictures a library called <a href="https://github.com/drj11/pypng">pypng
         </a> is used, which is awsome and alows to create images directly from numpy arrays.
     </p>
+
     <p>
         Each operations is measured to see how much it took to achieve its goal. It is easy to see
         that processing 40,320 possible solutions in C is light-speed fast, it took almost same
         amount of time as filtering redundant solutions (processing 92 objects).
     </p>
+
     <p>
         Source code can be found <a href = "https://github.com/lukaszszymankiewicz/8qp">here</a>
     </p>
 
     <h3> Statistics </h3>
 
-    <p>
+    <p style="text-indent: 0px;">
         Generating solutions took: {{'%0.4f'|format(solve_time|float)}} s. (C code)<br>
         Filtering redundat solutions took: {{'%0.4f'|format(filter_time|float)}} s. (Python Code)<br>
         Generating images took: {{'%0.4f'|format(images_time|float)}} s. (Python Code)<br>
     </p>
 
-    <h3> Solutions </h3>
+    <hr>
+    <center><h2> Solutions </h2></center>
 
     {% for images_batch in base_solutions_imgs|batch(6) %}
     <center>
@@ -91,12 +102,6 @@
     </center>
     {% endfor %}
 
-    <h3> Links </h3>
-    <p>
-      <a href = "https://en.wikipedia.org/wiki/Eight_queens_puzzle">
-        [1] https://en.wikipedia.org/wiki/Eight_queens_puzzle
-      </a>
-    <p>
   {% endblock %}
 
 </body>
